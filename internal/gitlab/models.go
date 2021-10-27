@@ -15,7 +15,7 @@ type GitLabPipeline struct {
 	WebURL         string               `json:"web_url"`
 	BeforeSHA      string               `json:"before_sha"`
 	Tag            bool                 `json:"tag"`
-	YAMLErrors     bool                 `json:"yaml_errors"`
+	YAMLErrors     string               `json:"yaml_errors"`
 	User           GitLabUser           `json:"user"`
 	StartedAt      string               `json:"started_at"`
 	FinishedAt     string               `json:"finished_at"`

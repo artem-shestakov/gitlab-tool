@@ -21,6 +21,7 @@ func (b *Bot) SendMesage(chatId string, text string) {
 	params := url.Values{}
 	params.Set("chat_id", chatId)
 	params.Set("text", text)
+	params.Set("parse_mode", "HTML")
 	resp, err := b.MakeRequest("sendMessage", params)
 	if err != nil {
 		fmt.Println(err.Error())

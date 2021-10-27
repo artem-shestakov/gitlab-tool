@@ -10,10 +10,19 @@ import (
 func (c *GitLab) GetPipeline(serverURL string, projectId string, pipelineId string) (GitLabPipeline, error) {
 	pipeline := GitLabPipeline{}
 	client := http.Client{}
-	req, _ := http.NewRequest("GET", fmt.Sprintf("https://git.digital.rt.ru/api/v4/projects/%s/pipelines/%s", projectId, pipelineId), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("https://git.digital.rt.ru/api/v4/projects/%s/pipelines/%s", projectId, pipelineId), nil)
+	if err != nil {
+		return pipeline, err
+	}
 	req.Header.Add("PRIVATE-TOKEN", c.Token)
-	resp, _ := client.Do(req)
+	resp, err := client.Do(req)
+	if err != nil {
+		return pipeline, err
+	}
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
-	json.Unmarshal(bodyBytes, &pipeline)
+	err = json.Unmarshal(bodyBytes, &pipeline)
+	if err != nil {
+		return pipeline, err
+	}
 	return pipeline, nil
 }
