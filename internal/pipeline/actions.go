@@ -59,7 +59,7 @@ func pipilineInfo() (string, error) {
 
 	var icon string
 	switch pipeline.Status {
-	case "success":
+	case "running":
 		icon = "✅"
 	case "failed":
 		icon = "‼️"
