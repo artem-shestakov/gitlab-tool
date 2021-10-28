@@ -57,16 +57,19 @@ func pipilineInfo() (string, error) {
 		return "", err
 	}
 
-	var icon string
+	var icon, status string
 	switch pipeline.Status {
 	case "running":
 		icon = "✅"
+		status = "SUCCESS"
 	case "failed":
 		icon = "‼️"
+		status = "FAILED"
 	default:
 		icon = "⚠️"
+		status = "UNKNOWN"
 	}
 
-	MSG = fmt.Sprintf(MSG, icon, pipeline.Status, fmt.Sprintf("<a href=\"%s\">%s</a>", pipeline.WebURL, strconv.Itoa(pipeline.ID)), pipeline.Ref, pipeline.User.Username)
+	MSG = fmt.Sprintf(MSG, icon, status, fmt.Sprintf("<a href=\"%s\">%s</a>", pipeline.WebURL, strconv.Itoa(pipeline.ID)), pipeline.Ref, pipeline.User.Username)
 	return MSG, nil
 }
