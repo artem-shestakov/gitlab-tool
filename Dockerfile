@@ -14,5 +14,6 @@ RUN go build cmd/gitlab-tool.go
 # Finish image
 FROM alpine
 WORKDIR /app
+ENV PATH="/app:${PATH}"
 
 COPY --from=builder /go/src/app/gitlab-tool .
